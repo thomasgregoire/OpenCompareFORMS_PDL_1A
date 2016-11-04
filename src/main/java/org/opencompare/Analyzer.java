@@ -16,8 +16,14 @@ public class Analyzer {
         if (!featureContainer.isEmpty()){
             featureContainer.clear();
         }
-        for (Feature feature : pcm.getConcreteFeatures()) {
-            featureContainer.put(feature.getName(), feature.getCells().get(0).getInterpretation().getClass().toString());
+        for (Product product : pcm.getProducts()) {
+            for (Feature feature : pcm.getConcreteFeatures()) {
+                if(feature.getCells().get(0).getInterpretation().getClass().getSimpleName().equals("NotAvailableImpl")){
+                    featureContainer.put(feature.getName(), "StringValueImpl");
+                }else{
+                    featureContainer.put(feature.getName(), feature.getCells().get(0).getInterpretation().getClass().getSimpleName());
+                }
+            }
         }
     }
 
