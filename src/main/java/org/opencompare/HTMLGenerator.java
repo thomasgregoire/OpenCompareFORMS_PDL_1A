@@ -9,15 +9,18 @@ import java.util.Map;
 public class HTMLGenerator
 {
 
-    public HashMap<String,String> GenerateFrom(HashMap<String,Class> features)
+    public static Map<String,String> GenerateFrom(Map<String,String> features)
     {
 
         // balises au format nom, balise en html
-        HashMap<String,String> balises = new HashMap();
+        Map<String,String> balises = new HashMap();
 
-        for(Map.Entry<String,Class> feat : features.entrySet())
+        for(Map.Entry<String,String> feat : features.entrySet())
         {
-            balises.put(feat.getKey(),CreateBaliseFrom(feat.getValue(),feat.getKey()));
+            String name = feat.getKey();
+            String cla = feat.getValue();
+            String balise = CreateBaliseFrom(cla,name);
+            balises.put(name,balise);
         }
 
         return balises;
@@ -25,16 +28,14 @@ public class HTMLGenerator
 
     //region Selection du type de balise
 
-    public String CreateBaliseFrom(Class c, String name)
+    private static String CreateBaliseFrom(String c, String name)
     {
 
-        String vType = c.getName();
         OCType Otype;
         String result = "";
-
         try
         {
-            Otype = OCType.valueOf(vType);
+            Otype = OCType.valueOf(c);
             switch (Otype)
             {
                 case ValueImpl:
@@ -88,7 +89,7 @@ public class HTMLGenerator
         return result;
     }
 
-    public enum OCType
+    private enum OCType
     {
         ValueImpl,
         BooleanValueImpl,
@@ -115,7 +116,7 @@ public class HTMLGenerator
      * @param name
      * @return
      */
-    public static String CreateTextInput(String name)
+    private static String CreateTextInput(String name)
     {
         return "<input type='text' name=" + name +">";
     }
@@ -125,69 +126,69 @@ public class HTMLGenerator
      * @param name
      * @return
      */
-    public static String CreateIntegerInput(String name){ return "<input type='number' name="+ name +" min='0' step='1'>"; }
+    private static String CreateIntegerInput(String name){ return "<input type='number' name="+ name +" min='0' step='1'>"; }
 
     /**
      * Creerr une balise de type number calibré pour les nombres reels
      * @param name
      * @return
      */
-    public static String CreateRealInput(String name) { return "<input type='number' name="+ name + ">"; }
+    private static String CreateRealInput(String name) { return "<input type='number' name="+ name + ">"; }
 
     /**
      * Creer une balise de type number calibree pour des multiples ?
      * @param name
      * @return
      */
-    public static String CreateMultipleInput(String name) { return "<input type='number' name="+ name +">"; }
+    private static String CreateMultipleInput(String name) { return "<input type='number' name="+ name +">"; }
 
     /**
      * Creer une balise Partial ?
      * @return
      */
-    public static String CreatePartialInput(String name) { return "<input type='text' name="+ name +">"; }
+    private static String CreatePartialInput(String name) { return "<input type='text' name="+ name +">"; }
 
     /**
      * Creer une balise de type texte avec un pattern specifique au versions
      * @return
      */
-    public static String CreateVersionInput(String name) { return "<input type='text' name=" + name + " pattern='\\d\\.\\d\\.\\d'>"; }
+    private static String CreateVersionInput(String name) { return "<input type='text' name=" + name + " pattern='\\d\\.\\d\\.\\d'>"; }
 
     /**
      * Creer une balise Unit ?
      * @return
      */
-    public static String CreateUnitInput(String name) { return "<input type='text' name="+ name +">"; }
+    private static String CreateUnitInput(String name) { return "<input type='text' name="+ name +">"; }
 
     /**
      * Creer une balise Dimension ?
      * @return
      */
-    public static String CreateDimensionInput(String name) { return "<input type='text' name="+ name +">"; }
+    private static String CreateDimensionInput(String name) { return "<input type='text' name="+ name +">"; }
 
     /**
      * Creer une balise Conditionnal ?
      * @return
      */
-    public static String CreateConditionalInput(String name) { return "<input type='text' name="+ name +">"; }
+    private static String CreateConditionalInput(String name) { return "<input type='text' name="+ name +">"; }
 
     /**
      * Creer une balise checkbox
      * @return
      */
-    public static String CreateCheckInput(String name) { return "<input type='checkbox' name="+ name +" value=''>"+name+"<br>"; }
+    private static String CreateCheckInput(String name) { return "<input type='checkbox' name="+ name +" value=''>"+name+"<br>"; }
 
     /**
      * Creer une balise date
      * @return
      */
-    public static String CreateDateInput(String name) { return "<input type='date' name="+ name +">"; }
+    private static String CreateDateInput(String name) { return "<input type='date' name="+ name +">"; }
 
     /**
      * Creer une balise erreur
      * @return
      */
-    public static String CreateErrorInput(String name) { return "<input type='text'' name="+name+" text='error'>"; }
+    private static String CreateErrorInput(String name) { return "<input type='text'' name="+name+" text='error'>"; }
 
     //endregion
 
