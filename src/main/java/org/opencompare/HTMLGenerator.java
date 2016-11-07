@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Mu-B on 20/10/2016.
+ * Created by BJBPrudor on 20/10/2016.
  */
 public class HTMLGenerator
 {
