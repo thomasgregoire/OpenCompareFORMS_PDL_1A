@@ -37,18 +37,23 @@ public class Analyzer {
 
                 while (it.hasNext()){
                     Map.Entry pair = (Map.Entry)it.next();
-                    if (type.equals("")){
-                        type = (String)pair.getKey();
-                        val = (Integer)pair.getValue();
-                    }else{
-                        if ((Integer)pair.getValue() > val){
-                            type = (String)pair.getKey();
-                            val = (Integer)pair.getValue();
+                    String key = (String)pair.getKey();
+                    int value = (Integer)pair.getValue();
+
+                    if (!key.equals("NotAvailableImpl") && !key.equals("NotApplicableImpl") && !key.equals("ValueImpl")){
+                        if (type.equals("")){
+                            type = key;
+                            val = value;
+                        }else{
+                            if ((Integer)pair.getValue() > val){
+                                type = key;
+                                val = value;
+                            }
                         }
                     }
                 }
 
-                if(type.equals("NotAvailableImpl")){
+                if(type.equals("")){
                     featureContainer.put(feature.getName(), "StringValueImpl");
                 }else{
                     featureContainer.put(feature.getName(), type);
