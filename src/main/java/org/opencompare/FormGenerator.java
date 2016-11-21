@@ -15,19 +15,25 @@ import java.util.Map;
 public class FormGenerator
 {
 
-    public static void main(String[] args) throws java.io.IOException
+    public static void main(String[] args) throws Exception
     {
 
-        File pcmFile = new File("model/euro.pcm");
+        File pcmFile = new File("pcms/euro.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
         PCM pcm = pcmc.getPcm();
 
         Analyzer a= new Analyzer();
-        a.findFeatures(pcm);
-        Map<String,String> feats = a.getFeatureContainer();
+        HTMLCreator creator = new HTMLCreator();
+
+        Map<String,String> features = a.getTypeFeatures(pcm); // récupère les features
+
+        Map<String,String> feats = a.getContentFeatures(pcm); //récupere les
         Map<String,String> beacon = HTMLGenerator.GenerateFrom(feats);
+
+        String text = creator.HTMLString(features);
+        creator.insertTexte(text);
 
     }
 

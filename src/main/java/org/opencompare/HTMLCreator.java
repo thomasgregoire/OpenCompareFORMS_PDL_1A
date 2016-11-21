@@ -1,16 +1,9 @@
 package org.opencompare;
 
-import org.opencompare.api.java.PCM;
-import org.opencompare.api.java.PCMContainer;
-import org.opencompare.api.java.impl.io.KMFJSONLoader;
-import org.opencompare.api.java.io.PCMLoader;
-
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 /**
@@ -78,7 +71,7 @@ public class HTMLCreator {
 
     public static void main(String[] Args) throws Exception {
 
-        Analyzer anal = new Analyzer();
+        /*Analyzer anal = new Analyzer();
         HTMLGenerator generator = new HTMLGenerator();
         HTMLCreator creator = new HTMLCreator();
 
@@ -89,7 +82,7 @@ public class HTMLCreator {
         anal.findFeatures(pcm);
 
         creator.insertTexte(creator.HTMLString(generator.GenerateFrom(anal.getFeatureContainer())));
-
+        */
 
     }
 
