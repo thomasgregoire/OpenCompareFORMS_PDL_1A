@@ -2,22 +2,24 @@ package org.opencompare;
 
 import org.opencompare.api.java.*;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by MSI_Thomas on 20/10/2016.
  */
 public class Analyzer {
 
+    private final int POURCENTAGE = 7;
+
     public Map getTypeFeatures(PCM pcm) {
-        HashMap featureTypeContainer = new HashMap();
+        HashMap featureTypeContainer = new HashMap<String, ArrayList<String>>();
+
         if (!featureTypeContainer.isEmpty()) {
             featureTypeContainer.clear();
         }
         for (Feature feature : pcm.getConcreteFeatures()) {
             HashMap typeContainer = new HashMap<String, Integer>();
+            List lesTypes = new ArrayList<String>();
             int i;
             for (Cell c : feature.getCells()) {
                 if (!typeContainer.containsKey(c.getInterpretation().getClass().getSimpleName())) {
@@ -29,38 +31,54 @@ public class Analyzer {
             }
             System.out.println(typeContainer.toString());
 
-            Iterator it = typeContainer.entrySet().iterator();
-
             String type = "";
+            String type2 = "";
             int val = 0;
+            int val2 = 0;
 
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                String key = (String) pair.getKey();
-                int value = (Integer) pair.getValue();
+            typeContainer.remove("NotApplicableImpl");
+            typeContainer.remove("NotAvailableImpl");
+            typeContainer.remove("ValueImpl");
 
-                if (!key.equals("NotAvailableImpl") && !key.equals("NotApplicableImpl") && !key.equals("ValueImpl")) {
-                    if (type.equals("")) {
+            if (typeContainer.isEmpty()) {
+                type = "StringValueImpl";
+            } else {
+                Iterator it = typeContainer.entrySet().iterator();
+
+
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    String key = (String) pair.getKey();
+                    int value = (Integer) pair.getValue();
+
+                    if (value > val) {
+                        if (val > 0) {
+                            type2 = type;
+                            val2 = val;
+                        }
                         type = key;
                         val = value;
-                    } else {
-                        if ((Integer) pair.getValue() > val) {
-                            type = key;
-                            val = value;
-                        }
+                    } else if (value > val2) {
+                        type2 = key;
+                        val2 = value;
                     }
+
+
                 }
             }
 
-            if (type.equals("")) {
-                featureTypeContainer.put(feature.getName(), "StringValueImpl");
-            } else {
-                featureTypeContainer.put(feature.getName(), type);
+            lesTypes.add(type);
+            double pourc = val2/(typeContainer.size())*100;
+            if (pourc > POURCENTAGE){
+                lesTypes.add(type2);
             }
+            System.out.println(lesTypes.toString());
+
+            featureTypeContainer.put(feature.getName(), lesTypes);
+
         }
         return featureTypeContainer;
     }
-
     public Map getContentFeatures(PCM pcm) {
         HashMap featureContentContainer = new HashMap();
         return featureContentContainer;
