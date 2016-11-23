@@ -47,6 +47,7 @@ public class HTMLCreator {
                 "            <br /><br />\n" +
                 "            <input class=\"btn btn-lg btn-primary\" type=\"reset\" value=\"Reset !\" />\n" +
                 "        </form>" +
+                "       <script src=\"verif.js\" type=\"text/javascript\"></script>\n" +
                 "    </body>\n" +
                 "\n" +
                 "</html>";

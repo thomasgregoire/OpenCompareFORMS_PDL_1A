@@ -18,7 +18,7 @@ public class FormGenerator
     public static void main(String[] args) throws Exception
     {
 
-        File pcmFile = new File("pcms/euro.pcm");
+        File pcmFile = new File("C:\\Users\\Jules\\OpenCompareFORMS_PDL_1A\\pcms\\model\\Comparison_of_C_Sharp_and_Java_4.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
@@ -29,10 +29,11 @@ public class FormGenerator
 
         Map<String,String> features = a.getTypeFeatures(pcm); // récupère les features
 
-        Map<String,String> feats = a.getContentFeatures(pcm); //récupere les
-        Map<String,String> beacon = HTMLGenerator.GenerateFrom(feats);
+        Map<String,String> feats = a.getContentFeatures(pcm);
 
-        String text = creator.HTMLString(features);
+        Map<String,String> beacon = HTMLGenerator.GenerateFrom(features);
+
+        String text = creator.HTMLString(beacon);
         creator.insertTexte(text);
 
     }

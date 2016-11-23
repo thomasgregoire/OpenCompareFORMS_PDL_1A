@@ -123,14 +123,14 @@ public class HTMLGenerator
      * @param name
      * @return
      */
-    private static String CreateIntegerInput(String name){ return "<input type='number' class='form-control' name="+ name +" min='0' step='1'>"; }
+    private static String CreateIntegerInput(String name){ return "<input type='number' class='form-control' name="+ name +" min='0' step='1'  onblur='verifEntier(this)'>"; }
 
     /**
      * Creerr une balise de type number calibré pour les nombres reels
      * @param name
      * @return
      */
-    private static String CreateRealInput(String name) { return "<input type='form' class='form-control' name="+ name + ">"; }
+    private static String CreateRealInput(String name) { return "<input type='text' class='form-control' name="+ name + " onblur='verifReel(this)' >"; }
 
     /**
      * Creer une balise de type number calibree pour des multiples ?
@@ -173,13 +173,23 @@ public class HTMLGenerator
      * Creer une balise checkbox
      * @return
      */
-    private static String CreateCheckInput(String name) { return "<input type='checkbox' class='form-control' name="+ name +" value=''>"+ name +"<br>"; }
+    private static String CreateCheckInput(String name) { return
+                                                                "<label class='col-sm-2 col-form-label'>true\n" +
+                                                                "   <input type='radio' name="+ name +"  value='true'>\n" +
+                                                                "</label>\n" +
+                                                                "<label class='col-sm-2 col-form-label'>false\n" +
+                                                                "   <input type='radio' name="+ name +" value=\"false\">\n" +
+                                                                "</label>\n" +
+                                                                "<label class='col-sm-2 col-form-label'>Sans réponse\n" +
+                                                                "   <input type='radio' name="+ name +"  value=''>\n" +
+                                                                "</label>\n";}
+
 
     /**
      * Creer une balise date
      * @return
      */
-    private static String CreateDateInput(String name) { return "<input type='date' class='form-control' name="+ name +">"; }
+    private static String CreateDateInput(String name) { return "<input type='date' class='form-control' name="+ name + " onblur='verifDate(this)'>"; }
 
     /**
      * Creer une balise erreur
