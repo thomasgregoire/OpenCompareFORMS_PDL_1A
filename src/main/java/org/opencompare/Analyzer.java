@@ -21,10 +21,14 @@ public class Analyzer {
             HashMap typeContainer = new HashMap<String, Integer>();
             List lesTypes = new ArrayList<String>();
             int i;
-            for (Cell c : feature.getCells()) {
-                if (!typeContainer.containsKey(c.getInterpretation().getClass().getSimpleName())) {
+            for (Cell c : feature.getCells())
+            {
+                if (!typeContainer.containsKey(c.getInterpretation().getClass().getSimpleName()))
+                {
                     typeContainer.put(c.getInterpretation().getClass().getSimpleName(), 1);
-                } else {
+                }
+                else
+                {
                     i = (Integer) typeContainer.get(c.getInterpretation().getClass().getSimpleName());
                     typeContainer.put(c.getInterpretation().getClass().getSimpleName(), i + 1);
                 }
