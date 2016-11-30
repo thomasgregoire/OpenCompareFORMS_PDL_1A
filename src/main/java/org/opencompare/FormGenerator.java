@@ -6,6 +6,7 @@ import org.opencompare.api.java.impl.io.KMFJSONLoader;
 import org.opencompare.api.java.io.PCMLoader;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +28,11 @@ public class FormGenerator
         Analyzer a= new Analyzer();
         HTMLCreator creator = new HTMLCreator();
 
-        Map<String,String> features = a.getTypeFeatures(pcm); // récupère les features
+        Map<String,List<String>> features = a.getTypeFeatures(pcm); // récupère les features
 
         Map<String,String> feats = a.getContentFeatures(pcm);
 
-        Map<String,String> beacon = HTMLGenerator.GenerateFrom(features);
+        Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
 
         String text = creator.HTMLString(beacon);
         creator.insertTexte(text);

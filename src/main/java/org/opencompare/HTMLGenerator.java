@@ -1,6 +1,8 @@
 package org.opencompare;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,18 +11,23 @@ import java.util.Map;
 public class HTMLGenerator
 {
 
-    public static Map<String,String> GenerateFrom(Map<String,String> features)
+    public static Map<String,List<String>> GenerateFrom(Map<String,List<String>> features)
     {
 
         // balises au format nom, balise en html
-        Map<String,String> balises = new HashMap();
+        Map<String,List<String>> balises = new HashMap<String,List<String>>();
 
-        for(Map.Entry<String,String> feat : features.entrySet())
+        for(Map.Entry<String,List<String>> feat : features.entrySet())
         {
             String name = feat.getKey();
-            String cla = feat.getValue();
-            String balise = CreateBaliseFrom(cla,name);
-            balises.put(name,balise);
+            List<String> cla = feat.getValue();
+            List<String> ba = new ArrayList<String>();
+            for (String s : cla)
+            {
+                String balise = CreateBaliseFrom(s,name);
+                ba.add(balise);
+            }
+            balises.put(name,ba);
         }
 
         return balises;
