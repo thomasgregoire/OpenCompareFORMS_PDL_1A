@@ -36,9 +36,9 @@ public class HTMLCreator {
 
             texte = texte + "<div class=\"col-sm-12\">\n" +
                     "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
-                    "                <div class=\"col-sm-6\">\n" +
-                    map.get(FeatureBalise) + "\n" +
+                    "                <div class=\"col-sm-6\">\n" +  map.get(FeatureBalise) + "\n" +
                     "                </div>\n" +
+                    "            <input type=\"button\"  value=\"changer le type de valeur\" onClick=\"afficher_cacher()\"/> " +
                     "            </div>\n" +
                     "            <br /><br />";
         }

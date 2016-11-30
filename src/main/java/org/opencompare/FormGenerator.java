@@ -18,7 +18,7 @@ public class FormGenerator
     public static void main(String[] args) throws Exception
     {
 
-        File pcmFile = new File("C:\\Users\\Jules\\OpenCompareFORMS_PDL_1A\\pcms\\model\\Comparison_of_C_Sharp_and_Java_4.pcm");
+        File pcmFile = new File("C:\\Users\\leila\\IdeaProjects\\OpenCompareFORMS_PDL_1A\\pcms\\model\\Comparison_between_Argentine_provinces_and_countries_by_GDP_(PPP)_per_capita_0.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);

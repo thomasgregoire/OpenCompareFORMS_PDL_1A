@@ -22,7 +22,7 @@ public class GettingStartedTest {
     public void testGettingStarted() throws IOException {
 
         // Define a file representing a PCM to load
-        File pcmFile = new File("pcms/example.pcm");
+        File pcmFile = new File("pcms/model/Comparison_between_Argentine_provinces_and_countries_by_GDP_(PPP)_per_capita_0.pcm");
 
         // Create a loader that can handle the file format
         PCMLoader loader = new KMFJSONLoader();
