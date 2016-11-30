@@ -29,56 +29,62 @@ public class Analyzer {
                     typeContainer.put(c.getInterpretation().getClass().getSimpleName(), i + 1);
                 }
             }
-            System.out.println(typeContainer.toString());
+            if (!typeContainer.isEmpty()) {
 
-            String type = "";
-            String type2 = "";
-            int val = 0;
-            int val2 = 0;
+                String type = "";
+                String type2 = "";
+                int val = 0;
+                int val2 = 0;
 
-            typeContainer.remove("NotApplicableImpl");
-            typeContainer.remove("NotAvailableImpl");
-            typeContainer.remove("ValueImpl");
+                typeContainer.remove("NotApplicableImpl");
+                typeContainer.remove("NotAvailableImpl");
+                typeContainer.remove("ValueImpl");
 
-            if (typeContainer.isEmpty()) {
-                type = "StringValueImpl";
-            } else {
-                Iterator it = typeContainer.entrySet().iterator();
+                if (typeContainer.isEmpty()) {
+                    type = "StringValueImpl";
+                } else {
+                    Iterator it = typeContainer.entrySet().iterator();
 
 
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry) it.next();
-                    String key = (String) pair.getKey();
-                    int value = (Integer) pair.getValue();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry) it.next();
+                        String key = (String) pair.getKey();
+                        int value = (Integer) pair.getValue();
 
-                    if (value > val) {
-                        if (val > 0) {
-                            type2 = type;
-                            val2 = val;
+                        if (value > val) {
+                            if (val > 0) {
+                                type2 = type;
+                                val2 = val;
+                            }
+                            type = key;
+                            val = value;
+                        } else if (value > val2) {
+                            type2 = key;
+                            val2 = value;
                         }
-                        type = key;
-                        val = value;
-                    } else if (value > val2) {
-                        type2 = key;
-                        val2 = value;
+
+
                     }
-
-
                 }
-            }
 
-            lesTypes.add(type);
-            double pourc = val2/(typeContainer.size())*100;
-            if (pourc > POURCENTAGE){
-                lesTypes.add(type2);
-            }
-            System.out.println(lesTypes.toString());
+                lesTypes.add(type);
 
-            featureTypeContainer.put(feature.getName(), lesTypes);
+                double pourc = val2 / (typeContainer.size()) * 100;
+                if (pourc > POURCENTAGE) {
+                    lesTypes.add(type2);
+                }
+                System.out.println(lesTypes.toString());
+
+                featureTypeContainer.put(feature.getName(), lesTypes);
+            }else {
+                lesTypes.add("StringValueImpl");
+                featureTypeContainer.put(feature.getName(), lesTypes);
+            }
 
         }
         return featureTypeContainer;
     }
+
     public Map getContentFeatures(PCM pcm) {
         HashMap featureContentContainer = new HashMap();
         return featureContentContainer;

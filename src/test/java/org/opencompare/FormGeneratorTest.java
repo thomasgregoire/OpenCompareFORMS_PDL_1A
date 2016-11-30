@@ -27,7 +27,7 @@ public class FormGeneratorTest {
 
     @Before
     public void loadPCM() throws IOException {
-        File pcmFile = new File("pcms/example.pcm");
+        File pcmFile = new File("pcms/Comparison_between_Esperanto_and_Ido_4.pcm");
         PCMLoader loader = new KMFJSONLoader();
         pcm = loader.load(pcmFile).get(0).getPcm();
         Analyzer a = new Analyzer();
@@ -45,6 +45,7 @@ public class FormGeneratorTest {
             assertFalse(value.contains("NotAvailableImpl"));
             assertFalse(value.contains("NotApplicableImpl"));
             assertFalse(value.contains("ValueImpl"));
+            assertTrue(value.size() <= 2 && value.size() > 0);
         }
     }
 
