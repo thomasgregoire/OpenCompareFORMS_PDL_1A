@@ -5,6 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.opencompare.api.java.Feature;
 import org.opencompare.api.java.PCM;
+import org.opencompare.api.java.PCMMetadata;
 import org.opencompare.api.java.impl.io.KMFJSONLoader;
 import org.opencompare.api.java.io.PCMLoader;
 
@@ -24,14 +25,16 @@ public class FormGeneratorTest {
 
     public Map<String, String> features;
     public PCM pcm;
+    public PCMMetadata metadata;
 
     @Before
     public void loadPCM() throws IOException {
-        File pcmFile = new File("pcms/Comparison_between_Esperanto_and_Ido_4.pcm");
+        File pcmFile = new File("pcms/Comparison_of_email_clients_8.pcm");
         PCMLoader loader = new KMFJSONLoader();
         pcm = loader.load(pcmFile).get(0).getPcm();
+        metadata = loader.load(pcmFile).get(0).getMetadata();
         Analyzer a = new Analyzer();
-        features = a.getTypeFeatures(pcm);
+        features = a.getTypeFeatures(pcm, metadata);
         assertNotNull(features);
     }
 
