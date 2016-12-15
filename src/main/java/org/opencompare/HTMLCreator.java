@@ -50,26 +50,27 @@ public class HTMLCreator {
 
             } else{
 
-                texte = texte + "<div class=\"col-sm-12\">\n" +
-                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
+                texte = texte + "" +
+                        "                <div id=\"bouton1\" class=\"col-sm-12\">\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + "1" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(0) + "\n" +
                         "                </div>\n" +
 
 
+
                         "           <div class =\"col-sm-1\">\n" +
-                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"alert\">\n" +
+                        "                    <input type=\"button\" id=\"bouton1\" class=\"btn btn-lg btn-primary btn-sm\" onClick=\"afficher_cacher()\" value=\"Modifier Type1\">\n" +
                         "                </div>" +
                         "            </div>\n" +
-                        "            <br /><br />"+
 
-                        "<div class=\"col-sm-12\">\n" +
-                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
+                        "<div id=\"bouton2\" style=\"display:none\" class=\"col-sm-12\">\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + "2" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(1) + "\n" +
                         "                </div>\n" +
 
 
                         "           <div class =\"col-sm-1\">\n" +
-                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"alert\">\n" +
+                        "                    <input type=\"button\" id=\"bouton2\" class=\"btn btn-lg btn-primary btn-sm\" onClick=\"afficher_cacher()\" value=\"Modifier Type2\" >\n" +
                         "                </div>" +
                         "            </div>\n" +
                         "            <br /><br />";
@@ -90,6 +91,7 @@ public class HTMLCreator {
                 "            <br /><br />\n" +
                 "        </form>" +
                 "       <script src=\"verif.js\" type=\"text/javascript\"></script>\n" +
+                "       <script src=\"bouton.js\" type=\"text/javascript\"></script>\n" +
                 "    </body>\n" +
                 "\n" +
                 "</html>";
