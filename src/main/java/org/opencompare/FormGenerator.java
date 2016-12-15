@@ -2,6 +2,7 @@ package org.opencompare;
 
 import org.opencompare.api.java.PCM;
 import org.opencompare.api.java.PCMContainer;
+import org.opencompare.api.java.PCMMetadata;
 import org.opencompare.api.java.impl.io.KMFJSONLoader;
 import org.opencompare.api.java.io.PCMLoader;
 
@@ -24,11 +25,12 @@ public class FormGenerator
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
         PCM pcm = pcmc.getPcm();
+        PCMMetadata metadata = pcmc.getMetadata();
 
         Analyzer a= new Analyzer();
         HTMLCreator creator = new HTMLCreator();
 
-        Map<String,List<String>> features = a.getTypeFeatures(pcm); // récupère les features
+        Map<String,List<String>> features = a.getTypeFeatures(pcm, metadata); // récupère les features
 
         Map<String,String> feats = a.getContentFeatures(pcm);
 
