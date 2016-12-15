@@ -5,16 +5,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.opencompare.api.java.Feature;
 import org.opencompare.api.java.PCM;
+import org.opencompare.api.java.PCMContainer;
 import org.opencompare.api.java.PCMMetadata;
 import org.opencompare.api.java.impl.io.KMFJSONLoader;
+import org.opencompare.api.java.io.ExportMatrix;
+import org.opencompare.api.java.io.ExportMatrixExporter;
 import org.opencompare.api.java.io.PCMLoader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static junit.framework.TestCase.*;
 
@@ -29,12 +29,15 @@ public class FormGeneratorTest {
 
     @Before
     public void loadPCM() throws IOException {
-        File pcmFile = new File("pcms/Comparison_of_email_clients_8.pcm");
+        File pcmFile = new File("pcms/Comparison_of_American_and_British_English_0.pcm");
         PCMLoader loader = new KMFJSONLoader();
-        pcm = loader.load(pcmFile).get(0).getPcm();
-        metadata = loader.load(pcmFile).get(0).getMetadata();
+        List<PCMContainer> pcmContainers = loader.load(pcmFile);
+        PCMContainer pcmc = pcmContainers.get(0);
+        ExportMatrixExporter eme = new ExportMatrixExporter();
+        ExportMatrix em = eme.export(pcmc);
+        PCM pcm = pcmc.getPcm();
         Analyzer a = new Analyzer();
-        features = a.getTypeFeatures(pcm, metadata);
+        features = a.getTypeFeatures(em, pcm);
         assertNotNull(features);
     }
 
@@ -50,11 +53,6 @@ public class FormGeneratorTest {
             assertFalse(value.contains("ValueImpl"));
             assertTrue(value.size() <= 2 && value.size() > 0);
         }
-    }
-
-    @Test
-    public void testAnalyzerFeatures() {
-        assertEquals(pcm.getConcreteFeatures().size(), features.size());
     }
 
 }
