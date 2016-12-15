@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public class HTMLCreator {
 
-    public String HTMLString(Map<String, String> map) {
+    public String HTMLString(Map<String, List<String>> map) {
         String texte = "<html>\n" +
                 "    <head>\n" +
                 "        <title>HTML de base</title>\n" +
@@ -30,22 +31,63 @@ public class HTMLCreator {
                 "\n" +
                 "        <form>\n";
 
-        for (String FeatureBalise : map.keySet()) {
 
+
+
+
+        for (String FeatureBalise : map.keySet()) {
+            System.out.println("------------------------------------");
             System.out.println(map.get(FeatureBalise));
 
-            texte = texte + "<div class=\"col-sm-12\">\n" +
-                    "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
-                    "                <div class=\"col-sm-6\">\n" +  map.get(FeatureBalise) + "\n" +
-                    "                </div>\n" +
-                    "            <input type=\"button\"  value=\"changer le type de valeur\" onClick=\"afficher_cacher()\"/> " +
-                    "            </div>\n" +
-                    "            <br /><br />";
+            if (map.get(FeatureBalise).size() == 1) {
+
+                texte = texte + "<div class=\"col-sm-12\">\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
+                        "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(0) + "\n" +
+                        "                </div>\n" +
+                        "            </div>\n" +
+                        "            <br /><br />";
+
+            } else{
+
+                texte = texte + "<div class=\"col-sm-12\">\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
+                        "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(0) + "\n" +
+                        "                </div>\n" +
+
+
+                        "           <div class =\"col-sm-1\">\n" +
+                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"alert\">\n" +
+                        "                </div>" +
+                        "            </div>\n" +
+                        "            <br /><br />"+
+
+                        "<div class=\"col-sm-12\">\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
+                        "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(1) + "\n" +
+                        "                </div>\n" +
+
+
+                        "           <div class =\"col-sm-1\">\n" +
+                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"alert\">\n" +
+                        "                </div>" +
+                        "            </div>\n" +
+                        "            <br /><br />";
+
+            }
         }
 
-        texte = texte + "            <input type=\"button\" class=\"btn btn-lg btn-primary\" value=\"alert\">\n" +
+
+
+
+
+
+
+        texte = texte +
+                "           <div class=\"col-sm-12\">\n" +
+                "            <input type=\"button\" class=\"btn btn-lg btn-primary\" value=\"Valider\">\n" +
+                "           </div>" +
                 "            <br /><br />\n" +
-                "            <input class=\"btn btn-lg btn-primary\" type=\"reset\" value=\"Reset !\" />\n" +
                 "        </form>" +
                 "       <script src=\"verif.js\" type=\"text/javascript\"></script>\n" +
                 "    </body>\n" +
@@ -66,24 +108,6 @@ public class HTMLCreator {
                     ("File created successfully");
         } catch (IOException e) {
         }
-
-    }
-
-
-    public static void main(String[] Args) throws Exception {
-
-        /*Analyzer anal = new Analyzer();
-        HTMLGenerator generator = new HTMLGenerator();
-        HTMLCreator creator = new HTMLCreator();
-
-        File pcmFile = new File("pcms/euro.pcm");
-        PCMLoader loader = new KMFJSONLoader();
-        PCM pcm = loader.load(pcmFile).get(0).getPcm();
-
-        anal.findFeatures(pcm);
-
-        creator.insertTexte(creator.HTMLString(generator.GenerateFrom(anal.getFeatureContainer())));
-        */
 
     }
 
