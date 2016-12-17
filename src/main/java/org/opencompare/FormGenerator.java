@@ -20,7 +20,8 @@ public class FormGenerator
     public static void main(String[] args) throws Exception
     {
 
-        File pcmFile = new File("pcms/example.pcm");
+        String path = "test.html";
+        File pcmFile = new File("pcms/euro.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
@@ -38,7 +39,7 @@ public class FormGenerator
         Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
 
         String text = creator.HTMLString(beacon);
-        creator.insertTexte(text);
+        creator.insertTexte(text,path);
 
     }
 

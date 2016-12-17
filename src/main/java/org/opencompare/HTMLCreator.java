@@ -121,11 +121,11 @@ public class HTMLCreator {
         return texte;
     }
 
-    public void insertTexte(String text) throws Exception {
+    public void insertTexte(String text, String path) throws Exception {
 
         try {
             BufferedWriter out = new
-                    BufferedWriter(new FileWriter("test.html"));
+                    BufferedWriter(new FileWriter(path));
             out.write(text);
             out.close();
             System.out.println
