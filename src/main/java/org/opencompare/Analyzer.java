@@ -118,11 +118,9 @@ public class Analyzer {
                        if(value/size * 100 >=POURCENTAGE_CONTENT){
                            listContent.add(key);
                        }
-
                    }
-                   featureContentContainer.put(feature.getName(),listContent);
-
                }
+               featureContentContainer.put(feature.getName(),listContent);
            }
        }
         System.out.println(featureContentContainer);

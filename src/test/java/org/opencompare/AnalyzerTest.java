@@ -28,7 +28,7 @@ public class AnalyzerTest {
 
     @Before
     public void loadPCM() throws IOException {
-        File pcmFile = new File("pcms/Comparison_of_BitTorrent_clients_7.pcm");
+        File pcmFile = new File("pcms/Comparison_of_BitTorrent_sites_0.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
