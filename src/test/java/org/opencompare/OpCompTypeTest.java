@@ -20,7 +20,7 @@ import java.util.*;
 public class OpCompTypeTest
 {
 
-    public static final File infolder = new File("pcms/");
+    public static final String infolder = "models/";
     public static final String outfolder = "output/";
     public static Map<String,List<InfoType>> data = new HashMap<String, List<InfoType>>();
     public static final int maxReturn = 2000;
@@ -32,19 +32,25 @@ public class OpCompTypeTest
         PrepareMap();
 
         int i = 0;
-        for (File f : infolder.listFiles())
+        try
         {
-            i++;
-            PCM pcm = OpenPCM(f);
-            if (pcm !=null) { ReadPCM(pcm); }
-            System.out.println("File n°" + i + " has been read");
+            File fold = new File(infolder);
+            for (File f : fold.listFiles())
+            {
+                i++;
+                PCM pcm = OpenPCM(f);
+                if (pcm !=null) { ReadPCM(pcm); }
+                System.out.println("File n°" + i + " has been read");
+            }
         }
-
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
         WriteFile(data);
 
     }
 
-    @Before
     public void PrepareMap()
     {
         for (HTMLGenerator.OCType t : HTMLGenerator.OCType.values())
@@ -53,7 +59,6 @@ public class OpCompTypeTest
         }
     }
 
-    @Before
     public PCM OpenPCM(File f)
     {
         try
