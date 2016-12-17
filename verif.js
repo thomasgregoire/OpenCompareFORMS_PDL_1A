@@ -23,16 +23,16 @@ function verifMail(champ)
     }
 }
 
-function verifPseudo(champ)
+function verifTexte(champ)
 {
-    if(champ.value.length < 2 || champ.value.length > 25)
+    if(champ.value.length >= 0)
     {
-        surligne(champ, true);
+        surligne(champ, false);
         return false;
     }
     else
     {
-        surligne(champ, false);
+        surligne(champ, true);
         return true;
     }
 }
@@ -56,19 +56,20 @@ function verifDate(champ)
 }
 
 function verifEntier(value){
-    if(!((parseFloat(value.value) == parseInt(value.value)) && !isNaN(value.value))){
-        surligne(value, true);
+    console.log(value.value);
+    if(value.value == "" || !((parseFloat(value.value) == parseInt(value.value)) && !isNaN(value.value))){
+        surligne(value, false);
 
         return true;
-
-    } else {
+    }else {
         surligne(value, false);
         return false;
     }
+
 }
 
 function verifReel(value){
-    var regex = /^[0-9]*[.|,]?[0-9]$/;
+    var regex = /^[0-9]*[.|,]?[0-9]*$/;
     if((!regex.test(value.value))){
         surligne(value, true);
 

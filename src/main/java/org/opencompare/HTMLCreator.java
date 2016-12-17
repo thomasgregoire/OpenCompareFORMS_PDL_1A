@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class HTMLCreator {
 
+    int compteur = 0;
+
     public String HTMLString(Map<String, List<String>> map) {
         String texte = "<html>\n" +
                 "    <head>\n" +
@@ -39,6 +41,8 @@ public class HTMLCreator {
             System.out.println("------------------------------------");
             System.out.println(map.get(FeatureBalise));
 
+
+
             if (map.get(FeatureBalise).size() == 1) {
 
                 texte = texte + "<div class=\"col-sm-12\">\n" +
@@ -50,32 +54,50 @@ public class HTMLCreator {
 
             } else{
 
-                texte = texte + "" +
-                        "                <div id=\"bouton1\" class=\"col-sm-12\">\n" +
-                        "                <label class=\"col-sm-1 col-form-label\">" + "1" + FeatureBalise + "</label>\n" +
-                        "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(0) + "\n" +
-                        "                </div>\n" +
-
-
+                texte = texte +
+                        "                <div class=\"col-sm-12\" id='" + compteur + " uno' style=\"display:''\" >\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
+                            "                <div class=\"col-sm-6\">\n" +
+                                                map.get(FeatureBalise).get(0) + "\n" +
+                            "                </div>\n" +
 
                         "           <div class =\"col-sm-1\">\n" +
-                        "                    <input type=\"button\" id=\"bouton1\" class=\"btn btn-lg btn-primary btn-sm\" onClick=\"afficher_cacher()\" value=\"Modifier Type1\">\n" +
-                        "                </div>" +
-                        "            </div>\n" +
+                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
+                        "                </div>\n" +
 
-                        "<div id=\"bouton2\" style=\"display:none\" class=\"col-sm-12\">\n" +
-                        "                <label class=\"col-sm-1 col-form-label\">" + "2" + FeatureBalise + "</label>\n" +
+                        "                </div>\n"+
+
+
+                        "                <div class=\"col-sm-12\" id='" + compteur + " bis' style=\"display:none\">\n" +
+                        "                <label class=\"col-sm-1 col-form-label\">" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(1) + "\n" +
                         "                </div>\n" +
 
-
                         "           <div class =\"col-sm-1\">\n" +
-                        "                    <input type=\"button\" id=\"bouton2\" class=\"btn btn-lg btn-primary btn-sm\" onClick=\"afficher_cacher()\" value=\"Modifier Type2\" >\n" +
+                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
+                        "                </div>\n" +
+
+                        "                </div>\n" +
+                        "            <br /><br />\n";
+
+
+                        /*"           <div class =\"col-sm-1\">\n" +
+                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\" onClick=afficher_cacher()>\n" +
+                        "                </div>\n" +
+                        "            <br /><br />\n";*/
+
+
+
+
+                       /* "           <div class =\"col-sm-1\">\n" +
+                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\">\n" +
                         "                </div>" +
                         "            </div>\n" +
-                        "            <br /><br />";
+                        "            <br /><br />";*/
 
             }
+
+            compteur++;
         }
 
 
