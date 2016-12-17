@@ -13,6 +13,7 @@ import java.util.*;
 public class Analyzer {
 
     private final int POURCENTAGE = 7;
+    private final int POURCENTAGE_CONTENT = 10;
 
 
     public Map getTypeFeatures(ExportMatrix em, PCM pcm) {
@@ -86,10 +87,49 @@ public class Analyzer {
         return featureTypeContainer;
     }
 
-    public Map getContentFeatures(PCM pcm) {
-        HashMap featureContentContainer = new HashMap();
+    public Map getContentFeatures(ExportMatrix em, PCM pcm) {
+        HashMap featureContentContainer = new HashMap<String, ArrayList<String>>();
+
+        Collection<String> nomFeature = getNomFeature(em);
+        if(!featureContentContainer.isEmpty()){
+            featureContentContainer.clear();
+        }
+       for(Feature feature : pcm.getConcreteFeatures()){
+           if(nomFeature.contains(feature.getName())){
+               HashMap contentContainer = new HashMap<String, Integer>();
+               List listContent = new ArrayList<String>();
+               int i;
+               for (Cell c : feature.getCells()) {
+                   if (c.getContent() != null) {
+                       if(!contentContainer.containsKey(c.getContent())){
+                           contentContainer.put(c.getContent(), 1);
+                       }else{
+                           i = (Integer) contentContainer.get(c.getContent());
+                           contentContainer.put(c.getContent(), i + 1);
+                       }
+                   }
+               }
+               if(!contentContainer.isEmpty()){
+                   Iterator it = contentContainer.entrySet().iterator();
+                   int size = contentContainer.size();
+                   while (it.hasNext()) {
+                       Map.Entry pair = (Map.Entry) it.next();
+                       String key = (String) pair.getKey();
+                       int value = (Integer) pair.getValue();
+                       if(value/size * 100 >=POURCENTAGE_CONTENT){
+                           listContent.add(key);
+                       }
+
+                   }
+                   featureContentContainer.put(feature.getName(),listContent);
+
+               }
+           }
+       }
+        System.out.println(featureContentContainer);
         return featureContentContainer;
     }
+
 
     private Collection<String> getNomFeature(ExportMatrix em){
         Collection<String> nomFeature = new ArrayList<String>();

@@ -33,7 +33,7 @@ public class FormGenerator
         ExportMatrix em = eme.export(pcmc);
         Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // récupère les features
 
-        Map<String,String> feats = a.getContentFeatures(pcm);
+        Map<String,String> feats = a.getContentFeatures(em,pcm);
 
         Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
 
