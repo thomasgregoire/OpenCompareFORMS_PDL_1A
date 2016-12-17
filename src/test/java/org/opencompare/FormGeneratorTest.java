@@ -24,8 +24,6 @@ import static junit.framework.TestCase.*;
 public class FormGeneratorTest {
 
     public Map<String, String> features;
-    public PCM pcm;
-    public PCMMetadata metadata;
 
     @Before
     public void loadPCM() throws IOException {
@@ -38,11 +36,11 @@ public class FormGeneratorTest {
         PCM pcm = pcmc.getPcm();
         Analyzer a = new Analyzer();
         features = a.getTypeFeatures(em, pcm);
-        assertNotNull(features);
     }
 
     @Test
     public void testAnalyzerTypes() {
+        assertNotNull(features);
         Iterator it = features.entrySet().iterator();
 
         while (it.hasNext()) {
