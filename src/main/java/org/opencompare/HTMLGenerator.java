@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by BJBPrudor on 20/10/2016.
@@ -96,7 +97,7 @@ public class HTMLGenerator
         return result;
     }
 
-    private enum OCType
+    public enum OCType
     {
         ValueImpl,
         BooleanValueImpl,
@@ -144,19 +145,32 @@ public class HTMLGenerator
      * @param name
      * @return
      */
-    private static String CreateMultipleInput(String name) { return "<input type='number' class='form-control' name="+ name +">"; }
+    private static String CreateMultipleInput(String name)
+    {
+        String p = "^(\\d*,)*(\\d*)";
+        String pl = "val1,val2,...,valN";
+        return "<input type='text' class='form-control' name="+ name + " pattern="+ p +" placeholder="+ pl +" >";
+    }
 
     /**
      * Creer une balise Partial ?
      * @return
      */
-    private static String CreatePartialInput(String name) { return "<input type='text' class='form-control' name="+ name +">"; }
+    private static String CreatePartialInput(String name)
+    {
+        return "<input type='text' class='form-control' name="+ name +" value='Partial'>";
+    }
 
     /**
      * Creer une balise de type texte avec un pattern specifique au versions
      * @return
      */
-    private static String CreateVersionInput(String name) { return "<input type='text' class='form-control' name=" + name + " pattern='\\d\\.\\d\\.\\d'>"; }
+    private static String CreateVersionInput(String name)
+    {
+        String p = "\\d\\.\\d\\.\\d";
+        String pl = "X.X.XX";
+        return "<input type='text' class='form-control' name="+ name + " pattern="+ p +" placeholder="+ pl +" >";
+    }
 
     /**
      * Creer une balise Unit ?
@@ -174,23 +188,25 @@ public class HTMLGenerator
      * Creer une balise Conditionnal ?
      * @return
      */
-    private static String CreateConditionalInput(String name) { return "<input type='text' class='form-control' name="+ name +">"; }
+    private static String CreateConditionalInput(String name)
+    {
+        String p = "$\\(\\w*\\)";
+        String pl = "text(text)";
+        return "<input type='text' class='form-control' name="+ name + " pattern="+ p +" placeholder="+ pl +" >";
+    }
 
     /**
      * Creer une balise checkbox
      * @return
      */
-    private static String CreateCheckInput(String name) { return
-                                                                "<label class='col-sm-2 col-form-label'>true\n" +
-                                                                "   <input type='radio' name="+ name +"  value='true'>\n" +
-                                                                "</label>\n" +
-                                                                "<label class='col-sm-2 col-form-label'>false\n" +
-                                                                "   <input type='radio' name="+ name +" value=\"false\">\n" +
-                                                                "</label>\n" +
-                                                                "<label class='col-sm-2 col-form-label'>Sans réponse\n" +
-                                                                "   <input type='radio' name="+ name +"  value=''>\n" +
-                                                                "</label>\n";}
-
+    private static String CreateCheckInput(String name)
+    {
+        return "<label class='col-sm-2 col-form-label'>true\n" + "   <input type='radio' name="+ name +"  value='true'>\n" +
+                "</label>\n" + "<label class='col-sm-2 col-form-label'>false\n" +
+                "   <input type='radio' name="+ name +" value=\"false\">\n" + "</label>\n" +
+                "<label class='col-sm-2 col-form-label'>Sans réponse\n" + "   <input type='radio' name="+ name +"  value=''>\n" +
+                "</label>\n";
+    }
 
     /**
      * Creer une balise date
