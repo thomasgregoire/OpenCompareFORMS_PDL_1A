@@ -20,7 +20,7 @@ public class FormGenerator
     public static void main(String[] args) throws Exception
     {
 
-        File pcmFile = new File("pcms/euro.pcm");
+        File pcmFile = new File("pcms/example.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);

@@ -24,7 +24,6 @@ public class Analyzer {
         if (!featureTypeContainer.isEmpty()) {
             featureTypeContainer.clear();
         }
-        System.out.println(pcm.getFeatures().size());
         for (Feature feature : pcm.getConcreteFeatures()) {
             if (nomFeature.contains(feature.getName())) {
                 HashMap typeContainer = new HashMap<String, Integer>();

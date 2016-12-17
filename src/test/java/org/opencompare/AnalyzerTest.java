@@ -21,13 +21,14 @@ import static junit.framework.TestCase.*;
 /**
  * Created by MSI_Thomas on 21/11/2016.
  */
-public class FormGeneratorTest {
+public class AnalyzerTest {
 
-    public Map<String, String> features;
+    public Map<String, ArrayList<String>> features;
+    public Map<String, ArrayList<String>> contents;
 
     @Before
     public void loadPCM() throws IOException {
-        File pcmFile = new File("pcms/Comparison_of_American_and_British_English_0.pcm");
+        File pcmFile = new File("pcms/Comparison_of_BitTorrent_clients_7.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
@@ -36,6 +37,7 @@ public class FormGeneratorTest {
         PCM pcm = pcmc.getPcm();
         Analyzer a = new Analyzer();
         features = a.getTypeFeatures(em, pcm);
+        contents =  a.getContentFeatures(em, pcm);
     }
 
     @Test
@@ -46,10 +48,25 @@ public class FormGeneratorTest {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             ArrayList value = (ArrayList) pair.getValue();
+            assertFalse(value.isEmpty());
             assertFalse(value.contains("NotAvailableImpl"));
             assertFalse(value.contains("NotApplicableImpl"));
             assertFalse(value.contains("ValueImpl"));
             assertTrue(value.size() <= 2 && value.size() > 0);
+        }
+    }
+
+    @Test
+    public void testAnalyzerContent() {
+        assertNotNull(contents);
+        assertNotNull(features);
+        assertEquals(contents.size(), features.size());
+        Iterator it = features.entrySet().iterator();
+        Iterator it2 = contents.entrySet().iterator();
+        while (it.hasNext() && it2.hasNext()){
+            Map.Entry pair = (Map.Entry) it.next();
+            Map.Entry pair2 = (Map.Entry) it2.next();
+            assertEquals(pair.getKey(), pair2.getKey());
         }
     }
 
