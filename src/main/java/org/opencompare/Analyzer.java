@@ -14,21 +14,11 @@ public class Analyzer {
 
     private final int POURCENTAGE = 7;
 
+
     public Map getTypeFeatures(ExportMatrix em, PCM pcm) {
         HashMap featureTypeContainer = new HashMap<String, ArrayList<String>>();
-        Collection<String> nomFeature = new ArrayList<String>();
+        Collection<String> nomFeature = getNomFeature(em);
         String nom = "";
-        for (int i = 0; i < em.getNumberOfColumns(); i++) {
-            for (int j = 0; j < em.getNumberOfRows(); j++) {
-                ExportCell c = em.getCell(j, i);
-                if (c != null) {
-                    if (c.isFeature()) {
-                        nom = c.getContent();
-                    }
-                }
-            }
-            nomFeature.add(nom);
-        }
 
         if (!featureTypeContainer.isEmpty()) {
             featureTypeContainer.clear();
@@ -61,7 +51,6 @@ public class Analyzer {
 
                     Iterator it = typeContainer.entrySet().iterator();
 
-
                     while (it.hasNext()) {
                         Map.Entry pair = (Map.Entry) it.next();
                         String key = (String) pair.getKey();
@@ -78,8 +67,6 @@ public class Analyzer {
                             type2 = key;
                             val2 = value;
                         }
-
-
                     }
 
                     lesTypes.add(type);
@@ -102,5 +89,22 @@ public class Analyzer {
     public Map getContentFeatures(PCM pcm) {
         HashMap featureContentContainer = new HashMap();
         return featureContentContainer;
+    }
+
+    private Collection<String> getNomFeature(ExportMatrix em){
+        Collection<String> nomFeature = new ArrayList<String>();
+        String nom = "";
+        for (int i = 0; i < em.getNumberOfColumns(); i++) {
+            for (int j = 0; j < em.getNumberOfRows(); j++) {
+                ExportCell c = em.getCell(j, i);
+                if (c != null) {
+                    if (c.isFeature()) {
+                        nom = c.getContent();
+                    }
+                }
+            }
+            nomFeature.add(nom);
+        }
+        return nomFeature;
     }
 }
