@@ -4,7 +4,7 @@
 
 function afficher_cacher(element1 , element2) {
 
-    console.log("J'ai cliqué");
+    //console.log("J'ai cliqué");
 
     var obj = document.getElementById(element1);
     var obj2 = document.getElementById(element2);
@@ -12,6 +12,6 @@ function afficher_cacher(element1 , element2) {
     console.log(obj);
     console.log(obj2);
 
-    obj.style.display = (obj.style.display == 'none' ? '' : 'none');
-    obj2.style.display = (obj2.style.display == 'none' ? '' : 'none');
+    obj.style.display = (obj.style.display == 'none' ? 'inline' : 'none');
+    obj2.style.display = (obj2.style.display == 'none' ? 'inline' : 'none');
 }

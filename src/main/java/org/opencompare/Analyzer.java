@@ -116,7 +116,7 @@ public class Analyzer {
                        String key = (String) pair.getKey();
                        int value = (Integer) pair.getValue();
                        if(value/size * 100 >=POURCENTAGE_CONTENT){
-                           listContent.add(key);
+                           listContent.add("\""+key+"\"");
                        }
                    }
                }

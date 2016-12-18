@@ -21,7 +21,7 @@ public class FormGenerator
     {
 
         String path = "test.html";
-        File pcmFile = new File("pcms/euro.pcm");
+        File pcmFile = new File("pcms/Comparison_of_layout_engines_(Scalable_Vector_Graphics)_2.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
@@ -34,11 +34,11 @@ public class FormGenerator
         ExportMatrix em = eme.export(pcmc);
         Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // récupère les features
 
-        Map<String,String> feats = a.getContentFeatures(em,pcm);
+        Map<String,List<String>> feats = a.getContentFeatures(em,pcm);
 
         Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
 
-        String text = creator.HTMLString(beacon);
+        String text = creator.HTMLString(beacon,feats);
         creator.insertTexte(text,path);
 
     }

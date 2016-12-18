@@ -25,7 +25,7 @@ function verifMail(champ)
 
 function verifTexte(champ)
 {
-    if(champ.value.length >= 0)
+    if(champ.value.length >= 0 || champ.value=="")
     {
         surligne(champ, false);
         return false;

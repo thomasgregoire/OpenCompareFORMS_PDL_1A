@@ -153,11 +153,11 @@ public class FormGeneratorGUI extends JFrame
 			ExportMatrix em = eme.export(pcmC);
 			Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // récupère les features
 
-			Map<String,String> feats = a.getContentFeatures(em,pcm);
+			Map<String,List<String>> feats = a.getContentFeatures(em,pcm);
 
 			Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
 
-			String text = creator.HTMLString(beacon);
+			String text = creator.HTMLString(beacon, feats);
 			try
 			{
 				creator.insertTexte(text,fOut);

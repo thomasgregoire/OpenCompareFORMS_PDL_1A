@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by BJBPrudor on 16/12/2016.
  */
-public class HTMLGeneratorTest
+/*public class HTMLGeneratorTest
 {
 
     String f1,f2,f3,f4,f5; //features
@@ -109,3 +109,4 @@ public class HTMLGeneratorTest
 
 
 }
+*/
