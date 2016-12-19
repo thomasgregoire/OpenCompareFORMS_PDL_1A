@@ -20,3 +20,23 @@ Javascript
 [IntelliJ] (https://www.jetbrains.com/idea/)
 
 ## Project structure
+```
+OpenCompareFORMS_PDL_1A
+    .idea
+    pcms // contains the pcm
+    src
+        main
+            java
+                org.opencompare
+                    Analyzer.java // analyses the different PCMs and provides the required information to classes responsible for the creation of the HTML form.
+                    HTMLGenerator.java // create the required tags.
+                    HTMLCreator.java // create the form and contains the script associated.
+                    FormGenerator.java // generates the form from a pcm.
+        test
+            java
+                org.opencompare
+                    AnalyzerTest
+                    HTMLGeneratorTest
+                    OpCompTypeTest
+```
+## Installation
