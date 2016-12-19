@@ -62,7 +62,6 @@ public class HTMLCreator {
                 "        <title>HTML de base</title>\n" +
                 "        <!-- Latest compiled and minified CSS -->\n" +
                 "        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">\n" +
-                "        <link rel=\"stylesheet\" href=\"formulaire.css\">\n" +
                 "\n" +
                 "      <link href = \"https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css\"\n" +
                 "         rel = \"stylesheet\">\n" +
@@ -73,7 +72,10 @@ public class HTMLCreator {
                 "\n" +
                 "    </head>\n" +
                 "    <body>\n" +
-                "    <h1>HTML crée depuis java</h1>\n" +
+                "    <div class=\"modal-dialog\" ng-class=\"size ? 'modal-' + size : ''\" style=\"min-width: 75%; max-width: 90%;\">" +
+                "       <div class=\"modal-content\" modal-transclude=\"\">" +
+                "           <div class=\"modal-header ng-scope\">Ajouter un produit</div>" +
+                "           <div class=\"modal-body\">" +
                 "\n" +
                 "        <form>\n";
 
@@ -87,7 +89,7 @@ public class HTMLCreator {
             if (map.get(FeatureBalise).size() == 1) {
 
                 texte = texte + "<div class=\"col-sm-12 ui-widget\">\n" +
-                        "                <label class=\"col-sm-1 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
+                        "                <label class=\"col-sm-3 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(0) + "\n" +
                         "                </div>\n" +
                         "            </div>\n" +
@@ -108,25 +110,25 @@ public class HTMLCreator {
 
                 texte = texte +
                         "                <div class=\"col-sm-12 ui-widget\" id='" + compteur + " uno' style=\"display:inline\" >\n" +
-                        "                <label class=\"col-sm-1 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
+                        "                <label class=\"col-sm-3 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" +
                         map.get(FeatureBalise).get(0) + "\n" +
                         "                </div>\n" +
 
-                        "           <div class =\"col-sm-1\">\n" +
-                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
+                        "           <div class =\"col-sm-3\">\n" +
+                        "                    <input type=\"button\" class=\"btn btn-primary ng-binding\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
                         "                </div>\n" +
 
                         "                </div>\n" +
 
 
                         "                <div class=\"col-sm-12 ui-widget\" id='" + compteur + " bis' style=\"display:none\">\n" +
-                        "                <label class=\"col-sm-1 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(1)) + "\" >" + FeatureBalise + "</label>\n" +
+                        "                <label class=\"col-sm-3 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(1)) + "\" >" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(1) + "\n" +
                         "                </div>\n" +
 
-                        "           <div class =\"col-sm-1\">\n" +
-                        "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
+                        "           <div class =\"col-sm-3\">\n" +
+                        "                    <input type=\"button\" class=\"btn btn-primary ng-binding\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
                         "                </div>\n" +
 
                         "                </div>\n" +
@@ -162,11 +164,14 @@ public class HTMLCreator {
 
 
         texte = texte +
-                "           <div class=\"col-sm-12\">\n" +
-                "            <input type=\"button\" class=\"btn btn-lg btn-primary\" value=\"Valider\">\n" +
                 "           </div>" +
-                "            <br /><br />\n" +
+                "           <div class=\"modal-footer ng-scope\">" +
+                "               <button type=\"button\" class=\"btn btn-default ng-binding\" data-dismiss=\"modal\">Annuler</button>" +
+                "               <button type=\"button\" class=\"btn btn-success ng-binding\">Créer</button>" +
+                "           </div>" +
                 "        </form>\n" +
+                "        </div>\n" +
+                "        </div>\n" +
                 "       <script type=\"text/javascript\">\n" +
                 "function afficher_cacher(element1 , element2) {\n" +
                 "   var obj = document.getElementById(element1);\n" +

@@ -174,7 +174,7 @@ public class HTMLGenerator
     {
         String id = deleteSpace(name) + compteur;
         String p = "^(\\d*,)*(\\d*)";
-        String pl = "Multiples valeurs ex: val1,val2,...,valN";
+        String pl = "val1,val2,...,valN";
         return "<input type='text' class='form-control' id=\""+ id + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)' >";
     }
 
@@ -242,14 +242,14 @@ public class HTMLGenerator
     public static String CreateCheckInput(String name,int compteur)
     {
         String id = deleteSpace(name) + compteur;
-        return "<label class='col-sm-2 col-form-label'>true\n" +
-                "   <input type='radio' id=\""+ id +"\"  value='true'>\n" +
+        return "<label class='col-sm-4 col-form-label'>true\n" +
+                "   <input type='radio' name=\"bool"+ id + "\"  id=\""+ id +"\"  value='true'>\n" +
                 "</label>\n" +
-                "<label class='col-sm-2 col-form-label'>false\n" +
-                "   <input type='radio' id=\""+ id +"\" value=\"false\">\n" +
+                "<label class='col-sm-4 col-form-label'>false\n" +
+                "   <input type='radio' name=\"bool" + id + "\" id=\""+ id +"\" value=\"false\">\n" +
                 "</label>\n" +
-                "<label class='col-sm-2 col-form-label'>Sans réponse\n" +
-                "   <input type='radio' id=\""+ id +"\"  value=''>\n" +
+                "<label class='col-sm-4 col-form-label'>Sans réponse\n" +
+                "   <input type='radio' name=\"bool" + id + "\" id=\""+ id +"\"  value=''>\n" +
                 "</label>\n";
     }
 
