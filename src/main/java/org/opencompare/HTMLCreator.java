@@ -23,14 +23,14 @@ public class HTMLCreator {
 
     String script = "";
 
-    private static String deleteSpace(String aModifier){
+    private static String deleteSpace(String aModifier) {
 
         return aModifier.replaceAll(" ", "");
 
     }
 
-    public static String recupID(String string){
-        String result="";
+    public static String recupID(String string) {
+        String result = "";
 
         Pattern p = Pattern.compile("id=\".*\"");
 
@@ -38,25 +38,23 @@ public class HTMLCreator {
 
         while (m.find()) {
             //System.out.println("groupe = " + m.group() + "\n") ;
-            result= m.group();
+            result = m.group();
         }
 
         result.replaceAll("id=", result);
         //result.substring(2, endIndex)
-        result = result.substring(4, result.length()-1);
+        result = result.substring(4, result.length() - 1);
 
         return result;
     }
 
-    public static boolean exclude(String string){
+    public static boolean exclude(String string) {
         return string.contains("(");
     }
 
-    public String HTMLString(Map<String, List<String>> map, Map<String,List<String>> donnees) {
+    public String HTMLString(Map<String, List<String>> map, Map<String, List<String>> donnees) {
 
         System.out.println(donnees.size());
-
-
 
 
         String texte = "<html>\n" +
@@ -80,14 +78,10 @@ public class HTMLCreator {
                 "        <form>\n";
 
 
-
-
-
         for (String FeatureBalise : map.keySet()) {
             System.out.println("------------------------------------");
             System.out.println(map.get(FeatureBalise));
             System.out.println(recupID(map.get(FeatureBalise).get(0)));
-
 
 
             if (map.get(FeatureBalise).size() == 1) {
@@ -99,7 +93,7 @@ public class HTMLCreator {
                         "            </div>\n" +
                         "            <br /><br />";
 
-                if(!exclude(recupID(map.get(FeatureBalise).get(0)))) {
+                if (!exclude(recupID(map.get(FeatureBalise).get(0)))) {
                     script = script + "<script>\n" +
                             "         $(function() {\n" +
                             "            var availableTutorials  =  " + donnees.get(FeatureBalise) + "\n" +
@@ -110,20 +104,20 @@ public class HTMLCreator {
                             "      </script>\n";
                 }
 
-            } else{
+            } else {
 
                 texte = texte +
                         "                <div class=\"col-sm-12 ui-widget\" id='" + compteur + " uno' style=\"display:inline\" >\n" +
                         "                <label class=\"col-sm-1 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
-                            "                <div class=\"col-sm-6\">\n" +
-                                                map.get(FeatureBalise).get(0) + "\n" +
-                            "                </div>\n" +
+                        "                <div class=\"col-sm-6\">\n" +
+                        map.get(FeatureBalise).get(0) + "\n" +
+                        "                </div>\n" +
 
                         "           <div class =\"col-sm-1\">\n" +
                         "                    <input type=\"button\" class=\"btn btn-lg btn-primary btn-sm\" value=\"changer\" onClick=\"afficher_cacher('" + compteur + " uno', '" + compteur + " bis')\">\n" +
                         "                </div>\n" +
 
-                        "                </div>\n"+
+                        "                </div>\n" +
 
 
                         "                <div class=\"col-sm-12 ui-widget\" id='" + compteur + " bis' style=\"display:none\">\n" +
@@ -138,7 +132,7 @@ public class HTMLCreator {
                         "                </div>\n" +
                         "            <br /><br />\n";
 
-                if(!exclude(recupID(map.get(FeatureBalise).get(0)))) {
+                if (!exclude(recupID(map.get(FeatureBalise).get(0)))) {
                     script = script +
                             "<script>\n" +
                             "         $(function() {\n" +
@@ -167,20 +161,95 @@ public class HTMLCreator {
         }
 
 
-
-
-
-
-
         texte = texte +
                 "           <div class=\"col-sm-12\">\n" +
                 "            <input type=\"button\" class=\"btn btn-lg btn-primary\" value=\"Valider\">\n" +
                 "           </div>" +
                 "            <br /><br />\n" +
-                "        </form>" +
-                "       <script src=\"verif.js\" type=\"text/javascript\"></script>\n" +
-                "       <script src=\"bouton.js\" type=\"text/javascript\"></script>\n" +
-                        script +
+                "        </form>\n" +
+                "       <script type=\"text/javascript\">\n" +
+                "function afficher_cacher(element1 , element2) {\n" +
+                "   var obj = document.getElementById(element1);\n" +
+                "   var obj2 = document.getElementById(element2);\n" +
+                "   console.log(obj);\n" +
+                "   console.log(obj2);\n" +
+                "   obj.style.display = (obj.style.display == 'none' ? 'inline' : 'none');\n" +
+                "   obj2.style.display = (obj2.style.display == 'none' ? 'inline' : 'none');\n" +
+                "}\n" +
+                "function surligne(champ, erreur)\n" +
+                "{\n" +
+                "   if(erreur)\n" +
+                "       champ.style.backgroundColor = \"#d9534f\";\n" +
+                "   else\n" +
+                "       champ.style.backgroundColor = \"#5cb85c\";\n" +
+                "}\n" +
+                "function verifMail(champ)\n" +
+                "{\n" +
+                "   var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$/;\n" +
+                "   if(!regex.test(champ.value))\n" +
+                "   {\n" +
+                "       surligne(champ, true);\n" +
+                "       return false;\n" +
+                "   }\n" +
+                "   else\n" +
+                "   {\n" +
+                "       surligne(champ, false);\n" +
+                "       return true;\n" +
+                "   }\n" +
+                "}\n" +
+                "function verifTexte(champ)\n" +
+                "{\n" +
+                "   if(champ.value.length >= 0 || champ.value==\"\")\n" +
+                "   {\n" +
+                "       surligne(champ, false);\n" +
+                "       return false;\n" +
+                "   }\n" +
+                "   else\n" +
+                "   {\n" +
+                "       surligne(champ, true);\n" +
+                "       return true;\n" +
+                "   }\n" +
+                "}\n" +
+                "function verifDate(champ)\n" +
+                "{\n" +
+                "   var regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;\n" +
+                "   if(!regex.test(champ.value))\n" +
+                "   {\n" +
+                "       surligne(champ, true);\n" +
+                "       console.log(champ.value);\n" +
+                "       return false;\n" +
+                "    }\n" +
+                "   else\n" +
+                "   {\n" +
+                "        surligne(champ, false);\n" +
+                "        return true;\n" +
+                "    }\n" +
+                "}\n" +
+                "function verifEntier(value){\n" +
+                "    console.log(value.value);\n" +
+                "    if(value.value == \"\" || !((parseFloat(value.value) == parseInt(value.value)) && !isNaN(value.value))){\n" +
+                "        surligne(value, false);\n" +
+                "        return true;\n" +
+                "    }else {\n" +
+                "        surligne(value, false);\n" +
+                "        return false;\n" +
+                "    }\n" +
+                "}\n" +
+                "function verifReel(value){\n" +
+                "    var regex = /^[0-9]*[.|,]?[0-9]*$/;\n" +
+                "    if((!regex.test(value.value))){\n" +
+                "        surligne(value, true);\n" +
+                "        return true;\n" +
+                "    } else {\n" +
+                "        surligne(value, false);\n" +
+                "        return false;\n" +
+                "    }\n" +
+                "}\n" +
+                "function checkboxF(value){\n" +
+                "    console.log(value);\n" +
+                "}\n" +
+                "</script>\n" +
+                script +
                 "    </body>\n" +
                 "\n" +
                 "</html>";
