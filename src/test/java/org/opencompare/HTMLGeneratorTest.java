@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by BJBPrudor on 16/12/2016.
  */
-/*public class HTMLGeneratorTest
+public class HTMLGeneratorTest
 {
 
     String f1,f2,f3,f4,f5; //features
@@ -20,11 +20,11 @@ import java.util.*;
     @Before
     public void PrepareFeats()
     {
-        f1 = "feature1";
-        f2 = "feature2";
-        f3 = "feature3";
-        f4 = "feature4";
-        f5 = "feature5";
+        f1 = "feata";
+        f2 = "featb";
+        f3 = "featc";
+        f4 = "featd";
+        f5 = "feate";
     }
 
     @Before
@@ -40,11 +40,11 @@ import java.util.*;
     @Before
     public void PrepareBalises()
     {
-        b1 = HTMLGenerator.CreateTextInput("$f");
-        b2 = HTMLGenerator.CreateIntegerInput("$f");
-        b3 = HTMLGenerator.CreateCheckInput("$f");
-        b4 = HTMLGenerator.CreateMultipleInput("$f");
-        b5 = HTMLGenerator.CreateConditionalInput("$f");
+        b1 = HTMLGenerator.CreateTextInput("$f",-1);
+        b2 = HTMLGenerator.CreateIntegerInput("$f",-1);
+        b3 = HTMLGenerator.CreateCheckInput("$f",-1);
+        b4 = HTMLGenerator.CreateMultipleInput("$f",-1);
+        b5 = HTMLGenerator.CreateConditionalInput("$f",-1);
     }
 
     public void PrepareMap()
@@ -84,24 +84,24 @@ import java.util.*;
         List<String> l;
 
         l = res.get(f1);
-        Assert.assertEquals(l.get(0),b1.replace("$f",f1));
-        Assert.assertEquals(l.get(1),b3.replace("$f",f1));
+        Assert.assertEquals(l.get(0),b1.replace("$f",f1).replace("-1","0"));
+        Assert.assertEquals(l.get(1),b3.replace("$f",f1).replace("-1","1"));
 
         l = res.get(f2);
-        Assert.assertEquals(l.get(0),b2.replace("$f",f2));
-        Assert.assertEquals(l.get(1),b4.replace("$f",f2));
+        Assert.assertEquals(l.get(0),b2.replace("$f",f2).replace("-1","2"));
+        Assert.assertEquals(l.get(1),b4.replace("$f",f2).replace("-1","3"));
 
         l = res.get(f3);
-        Assert.assertEquals(l.get(0),b4.replace("$f",f3));
-        Assert.assertEquals(l.get(1),b5.replace("$f",f3));
+        Assert.assertEquals(l.get(0),b4.replace("$f",f3).replace("-1","4"));
+        Assert.assertEquals(l.get(1),b5.replace("$f",f3).replace("-1","5"));
 
         l = res.get(f4);
-        Assert.assertEquals(l.get(0),b1.replace("$f",f4));
-        Assert.assertEquals(l.get(1),b5.replace("$f",f4));
+        Assert.assertEquals(l.get(0),b1.replace("$f",f4).replace("-1","6"));
+        Assert.assertEquals(l.get(1),b5.replace("$f",f4).replace("-1","7"));
 
         l = res.get(f5);
-        Assert.assertEquals(l.get(0),b2.replace("$f",f5));
-        Assert.assertEquals(l.get(1),b3.replace("$f",f5));
+        Assert.assertEquals(l.get(0),b2.replace("$f",f5).replace("-1","8"));
+        Assert.assertEquals(l.get(1),b3.replace("$f",f5).replace("-1","9"));
 
 
     }
@@ -109,4 +109,3 @@ import java.util.*;
 
 
 }
-*/

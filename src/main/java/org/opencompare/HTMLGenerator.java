@@ -134,91 +134,122 @@ public class HTMLGenerator
      * @param name
      * @return
      */
-    private static String CreateTextInput(String name,int compteur) { return "<input type='text' class='form-control' id=\"" + deleteSpace(name) + compteur + "\" onblur='verifTexte(this)'>"; }
+    public static String CreateTextInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Texte";
+        return "<input type='text' class='form-control' id=\"" + id + "\" placeholder=" + plhold + " onblur='verifTexte(this)'>";
+    }
 
     /**
      * Creer un balise de type number specialisé pour les int
      * @param name
      * @return
      */
-    private static String CreateIntegerInput(String name,int compteur){ return "<input type='number' class='form-control' id=\""+ deleteSpace(name) + compteur +"\" min='0' step='1'  onblur='verifEntier(this)'>"; }
+    public static String CreateIntegerInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Entier ex: 1000";
+        return "<input type='number' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" min='0' step='1'  onblur='verifEntier(this)'>";
+    }
 
     /**
      * Creerr une balise de type number calibré pour les nombres reels
      * @param name
      * @return
      */
-    private static String CreateRealInput(String name,int compteur) { return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur +"\" onblur='verifReel(this)' >"; }
+    public static String CreateRealInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Reel ex:1.52";
+        return "<input type='text' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" onblur='verifReel(this)' >";
+    }
 
     /**
      * Creer une balise de type number calibree pour des multiples ?
      * @param name
      * @return
      */
-    private static String CreateMultipleInput(String name,int compteur)
+    public static String CreateMultipleInput(String name,int compteur)
     {
+        String id = deleteSpace(name) + compteur;
         String p = "^(\\d*,)*(\\d*)";
-        String pl = "val1,val2,...,valN";
-        return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)' >";
+        String pl = "Multiples valeurs ex: val1,val2,...,valN";
+        return "<input type='text' class='form-control' id=\""+ id + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)' >";
     }
 
     /**
      * Creer une balise Partial ?
      * @return
      */
-    private static String CreatePartialInput(String name,int compteur)
+    public static String CreatePartialInput(String name,int compteur)
     {
-        return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur +"\" value='Partial' onblur='verifTexte(this)'>";
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Partial";
+        return "<input type='text' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" value='Partial' onblur='verifTexte(this)'>";
     }
 
     /**
      * Creer une balise de type texte avec un pattern specifique au versions
      * @return
      */
-    private static String CreateVersionInput(String name,int compteur)
+    public static String CreateVersionInput(String name,int compteur)
     {
+        String id = deleteSpace(name) + compteur;
         String p = "\\d\\.\\d\\.\\d";
-        String pl = "X.X.XX";
-        return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)'>";
+        String pl = "Version ex : 1.2.11";
+        return "<input type='text' class='form-control' id=\""+ id + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)'>";
     }
 
     /**
      * Creer une balise Unit ?
      * @return
      */
-    private static String CreateUnitInput(String name,int compteur) { return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur +"\" onblur='verifTexte(this)'>"; }
+    public static String CreateUnitInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Unité";
+        return "<input type='text' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" onblur='verifTexte(this)'>";
+    }
 
     /**
      * Creer une balise Dimension ?
      * @return
      */
-    private static String CreateDimensionInput(String name,int compteur) { return "<input type='text' class='form-control' id=\""+ deleteSpace(name)+ compteur +"\" onblur='verifTexte(this)'>"; }
+    public static String CreateDimensionInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Dimension ";
+        return "<input type='text' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" onblur='verifTexte(this)'>";
+    }
 
     /**
      * Creer une balise Conditionnal ?
      * @return
      */
-    private static String CreateConditionalInput(String name,int compteur)
+    public static String CreateConditionalInput(String name,int compteur)
     {
+        String id = deleteSpace(name) + compteur;
         String p = "$\\(\\w*\\)";
         String pl = "text(text)";
-        return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)' >";
+        return "<input type='text' class='form-control' id=\""+ id + "\" pattern="+ p +" placeholder="+ pl +" onblur='verifTexte(this)' >";
     }
 
     /**
      * Creer une balise checkbox
      * @return
      */
-    private static String CreateCheckInput(String name,int compteur)
+    public static String CreateCheckInput(String name,int compteur)
     {
+        String id = deleteSpace(name) + compteur;
         return "<label class='col-sm-2 col-form-label'>true\n" +
-                "   <input type='radio' id=\""+ deleteSpace(name) + compteur +"\"  value='true'>\n" +
+                "   <input type='radio' id=\""+ id +"\"  value='true'>\n" +
                 "</label>\n" +
                 "<label class='col-sm-2 col-form-label'>false\n" +
-                "   <input type='radio' id=\""+ deleteSpace(name) + compteur +"\" value=\"false\">\n" +
+                "   <input type='radio' id=\""+ id +"\" value=\"false\">\n" +
                 "</label>\n" +
                 "<label class='col-sm-2 col-form-label'>Sans réponse\n" +
-                "   <input type='radio' id=\""+ deleteSpace(name) + compteur +"\"  value=''>\n" +
+                "   <input type='radio' id=\""+ id +"\"  value=''>\n" +
                 "</label>\n";
     }
 
@@ -226,13 +257,23 @@ public class HTMLGenerator
      * Creer une balise date
      * @return
      */
-    private static String CreateDateInput(String name,int compteur) { return "<input type='date' class='form-control' id=\""+ deleteSpace(name) + compteur + "\" onblur='verifDate(this)'>"; }
+    public static String CreateDateInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "Date ex: 12/10/2016";
+        return "<input type='date' class='form-control' id=\""+ id + "\" placeholder="+ plhold +" onblur='verifDate(this)'>";
+    }
 
     /**
      * Creer une balise erreur
      * @return
      */
-    private static String CreateErrorInput(String name,int compteur) { return "<input type='text' class='form-control' id=\""+ deleteSpace(name) + compteur +"\" text='error' onblur='verifTexte(this)'>"; }
+    public static String CreateErrorInput(String name,int compteur)
+    {
+        String id = deleteSpace(name) + compteur;
+        String plhold = "error";
+        return "<input type='text' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" text='error' onblur='verifTexte(this)'>";
+    }
 
     //endregion
 
