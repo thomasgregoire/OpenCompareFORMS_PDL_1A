@@ -49,13 +49,11 @@ OpenCompareFORMS_PDL_1A
 ```
 
 ## Installation
-*Clone project from GitHub onto an IDE (eg. intelliJ)
+Clone project from GitHub onto an IDE (eg. intelliJ)
 
 Or
 
-Download zip form GitHub
-
-Extract the file
+Download zip form GitHub and extract the file
 
 Open the project in an IDE as a Maven Project (make sure the the "pom.xml" file is recognised as a maven file.
 
