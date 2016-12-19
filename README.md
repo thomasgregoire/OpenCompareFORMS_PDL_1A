@@ -53,12 +53,16 @@ OpenCompareFORMS_PDL_1A
 
 Or
 
-*Download zip form GitHub
-*Extract the file
-*Open the project in an IDE as a Maven Project (make sure the the "pom.xml" file is recognised as a maven file.
+Download zip form GitHub
+
+Extract the file
+
+Open the project in an IDE as a Maven Project (make sure the the "pom.xml" file is recognised as a maven file.
 
 If it is not the case, right click -> add as maven).
 
-*Run FormGeneratorGui
-  *Select the PCM that you want to edit
-  *Select the output for the HTML file
+Run FormGeneratorGui
+
+  Select the PCM that you want to edit
+
+  Select the output for the HTML file
