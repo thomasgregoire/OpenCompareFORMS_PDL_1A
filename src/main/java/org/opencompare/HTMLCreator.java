@@ -60,7 +60,8 @@ public class HTMLCreator {
     public String HTMLString(Map<String, List<String>> map, Map<String, List<String>> donnees) {
 
         // Header du fichier html (Ne change jamais
-        String texte = "<html>\n" +
+        String texte = "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />\n" +
+                "<html>\n" +
                 "    <head>\n" +
                 "        <title>HTML de base</title>\n" +
                 "        <!-- Latest compiled and minified CSS -->\n" +
@@ -171,7 +172,7 @@ public class HTMLCreator {
                 "           </div>" +
                 "           <div class=\"modal-footer ng-scope\">" +
                 "               <button type=\"button\" class=\"btn btn-default ng-binding\" data-dismiss=\"modal\">Annuler</button>" +
-                "               <button type=\"button\" class=\"btn btn-success ng-binding\">Créer</button>" +
+                "               <button type=\"button\" class=\"btn btn-success ng-binding\">Cr&eacute;er</button>" +
                 "           </div>" +
                 "        </form>\n" +
                 "        </div>\n" +
