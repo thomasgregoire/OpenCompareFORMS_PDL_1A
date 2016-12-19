@@ -12,7 +12,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.FileChooserUI;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
@@ -40,7 +39,15 @@ public class FormGeneratorGUI extends JFrame
 	private JLabel lblFichierHtml;
 	private JTextField txtOut;
 
-	private String fIn, fOut;
+	/**
+	 * Chemin d'accès au fichier d'entrée (PCM)
+	 */
+	private String fIn;
+	/**
+	 * Chemin d'accès au fichier dans lequel le formulaire sera créer
+	 */
+	private String fOut;
+
 	JFileChooser jfc = new JFileChooser();
 	private JLabel label;
 	
@@ -130,37 +137,37 @@ public class FormGeneratorGUI extends JFrame
 	public void RunGenerator()
 	{
 
-		if(fIn != "" && fOut != "")
+		if(fIn != "" && fOut != "") // on verifie que les chemins d'accès au fichiers d'entrée et de sortie ne soient pas vide
 		{
 			PCMContainer pcmC = new PCMContainer();
 			try
 			{
-				File pcmFile = new File(fIn);
+				File pcmFile = new File(fIn); // on creer un Objet file avec le chemin d'accès fIn
 				PCMLoader loader = new KMFJSONLoader();
-				List<PCMContainer> pcmContainers = loader.load(pcmFile);
-				pcmC = pcmContainers.get(0);
+				List<PCMContainer> pcmContainers = loader.load(pcmFile); // on charge le PCM
+				pcmC = pcmContainers.get(0); // on recupere le premier PCMContainer du PCM
 			}
 			catch(Exception e)
 			{
 				System.out.println(e);
 			}
-			PCM pcm = pcmC.getPcm();
+			PCM pcm = pcmC.getPcm(); // on recupere le PCM du PCMContainer
 
 			Analyzer a= new Analyzer();
 			HTMLCreator creator = new HTMLCreator();
 
 			ExportMatrixExporter eme = new ExportMatrixExporter();
-			ExportMatrix em = eme.export(pcmC);
-			Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // récupère les features
+			ExportMatrix em = eme.export(pcmC); // On recupere la matrice d'exportation du PCMContainer
+			Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // On analyse et recupere les types des differentes Features du PCM
 
-			Map<String,List<String>> feats = a.getContentFeatures(em,pcm);
+			Map<String,List<String>> feats = a.getContentFeatures(em,pcm); // On recupere le contenus des cellules pour chaques Features du PCM
 
-			Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
+			Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features); // On genere les balises HTML5 à partir des types des Features recuperes
 
-			String text = creator.HTMLString(beacon, feats);
+			String text = creator.HTMLString(beacon, feats); // On creer le formulaire HTML5
 			try
 			{
-				creator.insertTexte(text,fOut);
+				creator.insertTexte(text,fOut); // on enregistre le formulaire HTML5 dans le fichier situé au chemin d'accès fOut
 			}
 			catch (Exception e)
 			{

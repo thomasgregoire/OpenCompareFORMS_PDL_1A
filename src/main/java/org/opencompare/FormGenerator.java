@@ -21,26 +21,26 @@ public class FormGenerator
     public static void main(String[] args) throws Exception
     {
 
-        String path = "test.html";
+        String path = "test.html"; // chemin d'accès du fichier de sortie
         File pcmFile = new File("pcms/euro.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
-        PCMContainer pcmc = pcmContainers.get(0);
-        PCM pcm = pcmc.getPcm();
+        PCMContainer pcmc = pcmContainers.get(0); // on recupere le premier PCMContainer du fichier
+        PCM pcm = pcmc.getPcm(); // on recupere le PCM
 
         Analyzer a= new Analyzer();
         HTMLCreator creator = new HTMLCreator();
 
         ExportMatrixExporter eme = new ExportMatrixExporter();
         ExportMatrix em = eme.export(pcmc);
-        Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // récupère les features
+        Map<String,List<String>> features = a.getTypeFeatures(em,pcm); // on analyse et recupere les Features et leur type
 
-        Map<String,List<String>> feats = a.getContentFeatures(em,pcm);
+        Map<String,List<String>> feats = a.getContentFeatures(em,pcm); // on analyse et recupere les données des Features
 
-        Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features);
+        Map<String,List<String>> beacon = HTMLGenerator.GenerateFrom(features); // on creer les balises HTML5 à partir des types des Features
 
-        String text = creator.HTMLString(beacon,feats);
-        creator.insertTexte(text,path);
+        String text = creator.HTMLString(beacon,feats); // on Creer le formulaire HTML5 à partir des balises et données des Features
+        creator.insertTexte(text,path); // on enregistre le formulaire dans un fichier situé au chemin d'accès path
 
     }
 

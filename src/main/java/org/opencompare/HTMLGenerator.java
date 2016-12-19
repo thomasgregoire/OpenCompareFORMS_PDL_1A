@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * Created by BJBPrudor on 20/10/2016.
@@ -12,40 +11,57 @@ import java.util.regex.Pattern;
 public class HTMLGenerator
 {
 
+    /**
+     * Supprime les espaces dans le String en entrée
+     * @param aModifier String à modifier
+     * @return le String aModifier sans les espaces
+     */
     private static String deleteSpace(String aModifier)
     {
         return aModifier.replaceAll(" ", "");
     }
 
+    /**
+     * Gènere une Map de balises HTML5 depuis une Map de types en entrée
+     * @param features Map indexée par un String representant le nom de la Feature visée et contenant des listes de Types en String
+     * @return Map indexée par un String représentant le nom de la Feature visée et contenant des listes de balises HTML5
+     */
     public static Map<String,List<String>> GenerateFrom(Map<String,List<String>> features)
     {
 
-        // balises au format nom, balise en html
+        // Map de balises HTML5 indexé par un String (nom de la feature)
         Map<String,List<String>> balises = new HashMap<String,List<String>>();
-        int compteur = 0;
+        int compteur = 0; // compteur du nombre de balises existant
 
+        // on parcours toutes les entrée du Map d'entrée features
         for(Map.Entry<String,List<String>> feat : features.entrySet())
         {
 
-            String name = feat.getKey();
-            List<String> cla = feat.getValue();
+            String name = feat.getKey(); // on recupere la clé (le nom de la feature)
+            List<String> cla = feat.getValue(); // on recupere les types associés
             List<String> ba = new ArrayList<String>();
-            for (String s : cla)
+            for (String s : cla) // pour chaque type
             {
-                String balise = CreateBaliseFrom(s,name,compteur);
-                ba.add(balise);
-                compteur++;
+                String balise = CreateBaliseFrom(s,name,compteur); // on creer la balise associé au type
+                ba.add(balise); // on ajoute la balise a la liste de balise
+                compteur++; // on incremente le compteur de balise
             }
-            balises.put(name,ba);
+            balises.put(name,ba); // on ahoute dans le Map de balise une entrée avec le nom de la Feature et la liste des balises generées
 
         }
-
         return balises;
 
     }
 
     //region Selection du type de balise
 
+    /**
+     * Creer une balise HTML5 avec les paramètres suivants
+     * @param c Type de l'objet visé (Correspond a un type d'OpenCompare)
+     * @param name Nom de la Feature concernée par la balise
+     * @param compteur Numéro unique de la balise
+     * @return Un String representant une balise HTML5
+     */
     private static String CreateBaliseFrom(String c, String name, int compteur)
     {
 
@@ -53,11 +69,11 @@ public class HTMLGenerator
         String result = "";
         try
         {
-            Otype = OCType.valueOf(c);
-            switch (Otype)
+            Otype = OCType.valueOf(c); // on recupere la valeur correspondante a c dans l'Enumerateur OCType
+            switch (Otype) // on passe le type dans un switch
             {
                 case ValueImpl:
-                    result = CreateErrorInput(name,compteur);
+                    result = CreateTextInput(name,compteur);
                     break;
                 case BooleanValueImpl:
                     result = CreateCheckInput(name,compteur);
@@ -78,10 +94,10 @@ public class HTMLGenerator
                     result = CreateMultipleInput(name,compteur);
                     break;
                 case NotApplicableImpl:
-                    result = CreateErrorInput(name,compteur);
+                    result = CreateTextInput(name,compteur);
                     break;
                 case NotAvailableImpl:
-                    result = CreateErrorInput(name,compteur);
+                    result = CreateTextInput(name,compteur);
                     break;
                 case PartialImpl:
                     result = CreatePartialInput(name,compteur);
@@ -107,6 +123,9 @@ public class HTMLGenerator
         return result;
     }
 
+    /**
+     * Enumerateur contenant les differents type d'OpenCompare
+     */
     public enum OCType
     {
         ValueImpl,
@@ -130,9 +149,10 @@ public class HTMLGenerator
     //region creation de balise
 
     /**
-     * Creer un balise de type texte
-     * @param name
-     * @return
+     * Creer une balise HTML5 de type input Text
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateTextInput(String name,int compteur)
     {
@@ -142,9 +162,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer un balise de type number specialisé pour les int
-     * @param name
-     * @return
+     * Creer une balise HTML5 de type input number avec une contrainte d'Entier
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateIntegerInput(String name,int compteur)
     {
@@ -154,21 +175,23 @@ public class HTMLGenerator
     }
 
     /**
-     * Creerr une balise de type number calibré pour les nombres reels
-     * @param name
-     * @return
+     * Creer une balise HTML5 de type input number avec une contrainte de Réel
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateRealInput(String name,int compteur)
     {
         String id = deleteSpace(name) + compteur;
         String plhold = "Reel ex:1.52";
-        return "<input type='text' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" onblur='verifReel(this)' >";
+        return "<input type='number' class='form-control' id=\""+ id +"\" placeholder="+ plhold +" onblur='verifReel(this)' >";
     }
 
     /**
-     * Creer une balise de type number calibree pour des multiples ?
-     * @param name
-     * @return
+     * Creer une balise HTML5 de type input Text avec un Pattern qui verifie si l'entree correspond a un Multiple
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateMultipleInput(String name,int compteur)
     {
@@ -179,8 +202,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise Partial ?
-     * @return
+     * Creer une balise HTML5 de type input Text (avec comme valeur par Defaut : Partial)
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreatePartialInput(String name,int compteur)
     {
@@ -190,8 +215,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise de type texte avec un pattern specifique au versions
-     * @return
+     * Creer une balise HTML5 de type input Text avec un Pattern qui verifie si l'entree correspond à un numero de Version
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateVersionInput(String name,int compteur)
     {
@@ -202,8 +229,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise Unit ?
-     * @return
+     * Creer une balise HTML5 de type input Text
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateUnitInput(String name,int compteur)
     {
@@ -213,8 +242,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise Dimension ?
-     * @return
+     * Creer une balise HTML5 de type input Text
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateDimensionInput(String name,int compteur)
     {
@@ -224,8 +255,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise Conditionnal ?
-     * @return
+     * Creer une balise HTML5 de type input Text avec un Pattern qui verifie si l'entrée correspond à un Conditional
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateConditionalInput(String name,int compteur)
     {
@@ -236,8 +269,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise checkbox
-     * @return
+     * Creer une balise HTML5 contenant un ensemble de trois boutons Radio (Yes/No/N.A)
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateCheckInput(String name,int compteur)
     {
@@ -254,8 +289,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise date
-     * @return
+     * Creer une balise HTML5 de type input Date
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateDateInput(String name,int compteur)
     {
@@ -265,8 +302,10 @@ public class HTMLGenerator
     }
 
     /**
-     * Creer une balise erreur
-     * @return
+     * Creer une balise d'erreur (n'est pas utilisée)
+     * @param name Nom de la feature concernée (sert pour l'id)
+     * @param compteur Numero unique de la balise (sert pour l'id)
+     * @return un String represenant la balise crée
      */
     public static String CreateErrorInput(String name,int compteur)
     {
