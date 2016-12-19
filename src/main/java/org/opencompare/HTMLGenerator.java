@@ -283,7 +283,7 @@ public class HTMLGenerator
                 "<label class='col-sm-4 col-form-label'>false\n" +
                 "   <input type='radio' name=\"bool" + id + "\" id=\""+ id +"\" value=\"false\">\n" +
                 "</label>\n" +
-                "<label class='col-sm-4 col-form-label'>Sans réponse\n" +
+                "<label class='col-sm-4 col-form-label'>Sans r&eacute;ponse\n" +
                 "   <input type='radio' name=\"bool" + id + "\" id=\""+ id +"\"  value=''>\n" +
                 "</label>\n";
     }
