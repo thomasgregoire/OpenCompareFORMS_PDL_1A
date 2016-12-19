@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
  */
 public class HTMLGenerator
 {
-    private static String deleteSpace(String aModifier){
+
+    private static String deleteSpace(String aModifier)
+    {
         return aModifier.replaceAll(" ", "");
     }
 
@@ -24,6 +26,7 @@ public class HTMLGenerator
 
         for(Map.Entry<String,List<String>> feat : features.entrySet())
         {
+
             String name = feat.getKey();
             List<String> cla = feat.getValue();
             List<String> ba = new ArrayList<String>();
@@ -34,9 +37,11 @@ public class HTMLGenerator
                 compteur++;
             }
             balises.put(name,ba);
+
         }
 
         return balises;
+
     }
 
     //region Selection du type de balise
@@ -129,7 +134,7 @@ public class HTMLGenerator
      * @param name
      * @return
      */
-    private static String CreateTextInput(String name,int compteur) { return "<input type='text' class='form-control' id=\"" + deleteSpace(name) + "\" onblur='verifTexte(this)'>"; }
+    private static String CreateTextInput(String name,int compteur) { return "<input type='text' class='form-control' id=\"" + deleteSpace(name) + compteur + "\" onblur='verifTexte(this)'>"; }
 
     /**
      * Creer un balise de type number specialisé pour les int
