@@ -13,6 +13,7 @@ import java.util.Map;
 
 /**
  * Created by BJBPrudor on 07/11/2016.
+ * Cette classe permet de tester l'application depuis un IDE
  */
 public class FormGenerator
 {

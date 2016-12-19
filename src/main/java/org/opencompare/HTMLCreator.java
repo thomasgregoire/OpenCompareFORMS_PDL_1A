@@ -15,6 +15,8 @@ import java.util.Map;
 
 /**
  * Created by Jules on 07/11/2016.
+ * Cette classe a pour but de récupérer des données depuis Analyzer et HTMLGenerator afin de retourner le HTML et le Javascript
+ * à charger dans le fichier HTML généré
  */
 
 public class HTMLCreator {
@@ -51,12 +53,13 @@ public class HTMLCreator {
     public static boolean exclude(String string) {
         return string.contains("(");
     }
-
+    /**
+     * Génère le code du fichier html à créer
+     * @return String
+     */
     public String HTMLString(Map<String, List<String>> map, Map<String, List<String>> donnees) {
 
-        System.out.println(donnees.size());
-
-
+        // Header du fichier html (Ne change jamais
         String texte = "<html>\n" +
                 "    <head>\n" +
                 "        <title>HTML de base</title>\n" +
@@ -87,7 +90,7 @@ public class HTMLCreator {
 
 
             if (map.get(FeatureBalise).size() == 1) {
-
+                // Création des balises sans double types
                 texte = texte + "<div class=\"col-sm-12 ui-widget\">\n" +
                         "                <label class=\"col-sm-3 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
                         "                <div class=\"col-sm-6\">\n" + map.get(FeatureBalise).get(0) + "\n" +
@@ -107,7 +110,7 @@ public class HTMLCreator {
                 }
 
             } else {
-
+                //Création des balises avec double types
                 texte = texte +
                         "                <div class=\"col-sm-12 ui-widget\" id='" + compteur + " uno' style=\"display:inline\" >\n" +
                         "                <label class=\"col-sm-3 col-form-label\" for = \"" + recupID(map.get(FeatureBalise).get(0)) + "\" >" + FeatureBalise + "</label>\n" +
@@ -134,6 +137,7 @@ public class HTMLCreator {
                         "                </div>\n" +
                         "            <br /><br />\n";
 
+                // Ajout du JS pour l'autocomplétion
                 if (!exclude(recupID(map.get(FeatureBalise).get(0)))) {
                     script = script +
                             "<script>\n" +
@@ -162,7 +166,7 @@ public class HTMLCreator {
             compteur++;
         }
 
-
+        //Ajout des boutons de fin de pages et du JS de vérification et de changement de type)
         texte = texte +
                 "           </div>" +
                 "           <div class=\"modal-footer ng-scope\">" +

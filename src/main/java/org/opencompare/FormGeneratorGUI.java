@@ -32,7 +32,7 @@ public class FormGeneratorGUI extends JFrame
 {
 
 	/**
-	 * 
+	 * Cette classe est utilisé pour créer une interface graphique permettant de tester cette application plus facilement
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
