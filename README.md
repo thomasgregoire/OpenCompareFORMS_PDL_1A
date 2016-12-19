@@ -50,10 +50,14 @@ OpenCompareFORMS_PDL_1A
 
 ## Installation
 1. Clone project from GitHub onto an IDE (eg. intelliJ)
+
 Or Download zip form GitHub
-    1.Extract the zip file
+  1.Extract the zip file
+
 2. Open the project in an IDE as a Maven Project (make sure the the "pom.xml" file is recognised as a maven file.
+
 If it is not the case, right click -> add as maven).
+
 3. Run FormGeneratorGui
-    1.Select the PCM that you want to edit
-    2.Select the output for the HTML file
+  1.Select the PCM that you want to edit
+  2.Select the output for the HTML file
