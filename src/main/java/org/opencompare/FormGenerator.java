@@ -22,7 +22,7 @@ public class FormGenerator
     {
 
         String path = "test.html";
-        File pcmFile = new File("pcms/Comparison_of_layout_engines_(Scalable_Vector_Graphics)_2.pcm");
+        File pcmFile = new File("pcms/euro.pcm");
         PCMLoader loader = new KMFJSONLoader();
         List<PCMContainer> pcmContainers = loader.load(pcmFile);
         PCMContainer pcmc = pcmContainers.get(0);
